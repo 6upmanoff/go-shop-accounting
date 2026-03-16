@@ -1,0 +1,34 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{block "title" .}}Система учета{{end}}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo-block">
+                <h1>Система учета</h1>
+                <p>Управление товарами, продажами и долгами</p>
+            </div>
+
+            <nav class="main-nav">
+                <a href="/">Главная</a>
+                <a href="/product/add">Добавить товар</a>
+                <a href="/stock">Склад</a>
+                <a href="/purchase">Закупки</a>
+                <a href="/sales">Отпуск со склада</a>
+                <a href="/debts">Долги</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        {{block "content" .}}{{end}}
+    </main>
+</body>
+</html>
+{{end}}

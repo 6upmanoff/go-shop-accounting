@@ -1,0 +1,59 @@
+{{define "debt_payment.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Оплата долга{{end}}
+
+{{define "content"}}
+
+<h2>Оплата долга</h2>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Клиент</div>
+        <div class="stat-value" style="font-size: 20px;">{{.ClientName}}</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">Товар</div>
+        <div class="stat-value" style="font-size: 20px;">{{.ProductName}}</div>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Сумма долга</div>
+        <div class="stat-value">{{printf "%.2f" .TotalPrice}} ₸</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">Уже оплачено</div>
+        <div class="stat-value">{{printf "%.2f" .PaidAmount}} ₸</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">Остаток</div>
+        <div class="stat-value">{{printf "%.2f" .Remaining}} ₸</div>
+    </div>
+</div>
+
+<form method="POST" action="/debts/pay?sale_id={{.SaleID}}">
+    <label for="amount">Сумма оплаты</label>
+    <input
+        type="number"
+        step="0.01"
+        min="0.01"
+        max="{{printf "%.2f" .Remaining}}"
+        name="amount"
+        id="amount"
+        required
+    >
+
+    <button type="submit">Сохранить оплату</button>
+</form>
+
+<div style="margin-top: 20px;">
+    <a class="btn" href="/debts">Назад к долгам</a>
+</div>
+
+{{end}}

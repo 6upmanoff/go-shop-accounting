@@ -1,0 +1,61 @@
+{{define "debts.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Долги клиентов{{end}}
+
+{{define "content"}}
+
+<h2>Долги клиентов</h2>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Общий остаток долга</div>
+        <div class="stat-value">{{printf "%.2f" .TotalRemaining}} ₸</div>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID долга</th>
+            <th>Клиент</th>
+            <th>Товар</th>
+            <th>Кол-во</th>
+            <th>Сумма долга</th>
+            <th>Оплачено</th>
+            <th>Остаток</th>
+            <th>Дата</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{if .Debts}}
+            {{range .Debts}}
+            <tr>
+                <td>{{.SaleID}}</td>
+                <td>{{.ClientName}}</td>
+                <td>{{.ProductName}}</td>
+                <td>{{printf "%.2f" .QtyKg}} кг</td>
+                <td>{{printf "%.2f" .TotalPrice}} ₸</td>
+                <td>{{printf "%.2f" .PaidAmount}} ₸</td>
+                <td><b>{{printf "%.2f" .Remaining}} ₸</b></td>
+                <td>{{.SaleDate}}</td>
+                <td>
+                    <a class="btn" href="/debts/pay?sale_id={{.SaleID}}">Оплатить</a>
+                </td>
+            </tr>
+            {{end}}
+        {{else}}
+            <tr>
+                <td colspan="9">Долгов нет</td>
+            </tr>
+        {{end}}
+    </tbody>
+</table>
+
+<div style="margin-top: 20px;">
+    <a class="btn" href="/">Назад</a>
+</div>
+
+{{end}}

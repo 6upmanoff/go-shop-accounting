@@ -1,0 +1,34 @@
+{{define "stock.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Склад{{end}}
+
+{{define "content"}}
+<h2>Остатки склада</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Пришло (кг)</th>
+            <th>Отпущено (кг)</th>
+            <th>Остаток (кг)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .Items}}
+        <tr>
+            <td>{{.Name}}</td>
+            <td>{{printf "%.2f" .Purchased}}</td>
+            <td>{{printf "%.2f" .Sold}}</td>
+            <td><b>{{printf "%.2f" .Stock}}</b></td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="4">Нет данных</td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+{{end}}

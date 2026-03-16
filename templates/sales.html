@@ -1,0 +1,77 @@
+{{define "sales.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Продажи{{end}}
+
+{{define "content"}}
+
+<h2>Список отпуска со склада</h2>
+
+<div class="card">
+    <form method="GET" action="/sales">
+        <label for="from">С</label>
+        <input type="date" id="from" name="from" value="{{.From}}">
+
+        <label for="to">По</label>
+        <input type="date" id="to" name="to" value="{{.To}}">
+
+        <button type="submit">Показать</button>
+    </form>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Общий отпуск</div>
+        <div class="stat-value">{{printf "%.2f" .TotalAll}} ₸</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">Нал</div>
+        <div class="stat-value">{{printf "%.2f" .TotalCash}} ₸</div>
+    </div>
+
+    <div class="stat-box">
+        <div class="stat-label">В долг</div>
+        <div class="stat-value">{{printf "%.2f" .TotalDebt}} ₸</div>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <a class="btn" href="/sales/add">➕ Отпуск со склада</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Дата</th>
+            <th>Товар</th>
+            <th>кг</th>
+            <th>Цена/кг</th>
+            <th>Сумма</th>
+            <th>Оплата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{if .Sales}}
+            {{range .Sales}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.SaleDate.Format "2006-01-02"}}</td>
+                <td>{{.Product}}</td>
+                <td>{{printf "%.3f" .QtyKg}}</td>
+                <td>{{printf "%.2f" .PricePerKg}}</td>
+                <td>{{printf "%.2f" .TotalPrice}}</td>
+                <td>{{.Payment}}</td>
+            </tr>
+            {{end}}
+        {{else}}
+            <tr>
+                <td colspan="7">Нет записей за выбранный период</td>
+            </tr>
+        {{end}}
+    </tbody>
+</table>
+
+{{end}}

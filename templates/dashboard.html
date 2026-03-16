@@ -1,0 +1,50 @@
+{{define "dashboard.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Главная{{end}}
+
+{{define "content"}}
+
+<h2>Главная</h2>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <div class="stat-label">Чистая прибыль</div>
+        <div class="stat-value">{{printf "%.2f" .Profit}} ₸</div>
+    </div>
+</div>
+
+<div class="quick-actions">
+    <a class="action-card" href="/product/add">
+        <div class="action-title">Добавить товар</div>
+        <div class="action-text">Создание нового товара в системе</div>
+    </a>
+
+    <a class="action-card" href="/purchase">
+        <div class="action-title">Добавить закупку</div>
+        <div class="action-text">Оформление прихода товара на склад</div>
+    </a>
+
+    <a class="action-card" href="/sales/add">
+        <div class="action-title">Отпуск со склада</div>
+        <div class="action-text">Оформление продажи товара</div>
+    </a>
+
+    <a class="action-card" href="/sales">
+        <div class="action-title">Список продаж</div>
+        <div class="action-text">Просмотр всех операций отпуска со склада</div>
+    </a>
+
+    <a class="action-card" href="/stock">
+        <div class="action-title">Остатки склада</div>
+        <div class="action-text">Актуальные остатки товаров</div>
+    </a>
+
+    <a class="action-card" href="/debts">
+        <div class="action-title">Долги клиентов</div>
+        <div class="action-text">Контроль задолженностей и оплат</div>
+    </a>
+</div>
+
+{{end}}

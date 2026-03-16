@@ -1,0 +1,25 @@
+{{define "product_add.html"}}
+    {{template "base" .}}
+{{end}}
+
+{{define "title"}}Добавить товар{{end}}
+
+{{define "content"}}
+
+<h2>Добавить товар</h2>
+
+<form method="POST" action="/product/add">
+    <label for="name">Название товара</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="category">Категория</label>
+    <input type="text" name="category" id="category">
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<div style="margin-top: 20px;">
+    <a class="btn" href="/">Назад</a>
+</div>
+
+{{end}}
